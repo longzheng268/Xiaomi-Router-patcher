@@ -1,0 +1,162 @@
+# Chinese language pack for Xiaomi Router
+# Generated from Chinese text found in existing language files
+
+msgid 0x02B06026
+msgstr "*如需修改时区，请切换到主Mesh路由进行修改，会自动同步到子Mesh路由"
+
+msgid 0x03FCC83A
+msgstr "请选择WAN口"
+
+msgid 0x0DBB1237
+msgstr "2、确保待添加的子路由处于未配置状态（长按Reset按钮5秒后即可恢复成未配置状态）;"
+
+msgid 0x0DCF73A9
+msgstr "确认是否关闭IPTV功能"
+
+msgid 0x14400DAE
+msgstr "连接设备数量："
+
+msgid 0x22F83390
+msgstr "请选择一个网口作为IPTV口"
+
+msgid 0x2406B809
+msgstr "智能选择WAN口（推荐）"
+
+msgid 0x26CFD986
+msgstr "”作为WAN口"
+
+msgid 0x28A2D339
+msgstr "Wi-Fi密码: 未设置"
+
+msgid 0x34011096
+msgstr "此时5G网络已打开"
+
+msgid 0x39632C1F
+msgstr "当前系统时区："
+
+msgid 0x3A9A6E52
+msgstr "聚合口"
+
+msgid 0x45F4D8A1
+msgstr "检测到Mesh网络均为有线组网，"
+
+msgid 0x502C362D
+msgstr "正在同步Mesh节点配置..."
+
+msgid 0x52A8742A
+msgstr "您可以开放专有回程频段以获得更好的Wi-Fi体验"
+
+msgid 0x59A52F31
+msgstr "固定WAN口"
+
+msgid 0x5B994F9D
+msgstr "1、确认主路由与待添加的子路由均支持小米Mesh组网功能："
+
+msgid 0x5E0B9FEC
+msgstr "3、将待添加的子路由升至最新固件，并重置后重试（长按Reset按钮5秒后即可重置）"
+
+msgid 0x602D46E9
+msgstr "当前系统时间："
+
+msgid 0x63EA2194
+msgstr "4、将待添加的子路由升至最新固件，并重置后重试"
+
+msgid 0x69A2AD60
+msgstr "请选择网口"
+
+msgid 0x77E732D0
+msgstr "搜索并添加Mesh节点"
+
+msgid 0x8F09C395
+msgstr "连接设备数量 --"
+
+msgid 0x91F1F04C
+msgstr "知道了"
+
+msgid 0x93616EE3
+msgstr "2、将主路由升至最新固件版本；"
+
+msgid 0x93F9B492
+msgstr "智能识别网口“"
+
+msgid 0x9B7BD06B
+msgstr "搜索Mesh子路由..."
+
+msgid 0xA386BFE2
+msgstr "未检测到宽带网线接入，请将网线连接到任意网口"
+
+msgid 0xA762DE57
+msgstr "3、将待添加的子路由靠近主路由并重试（注意保持1米以外的距离以免干扰）；"
+
+msgid 0xB73301CC
+msgstr "2. 屏幕处于亮屏解锁的状态"
+
+msgid 0xCB48B8E3
+msgstr "Wi-Fi名称："
+
+msgid 0xD00B13F6
+msgstr "正在扩展Mesh节点(1-2分钟)..."
+
+msgid 0xD712B61B
+msgstr "1、将待添加的子路由靠近主路由并重试（注意保持1米以外的距离以免干扰）；"
+
+msgid 0xE5AFB325
+msgstr "可以尝试以下方法："
+
+msgid 0xE6817811
+msgstr "Wi-Fi密码："
+
+msgid 0xE8590A21
+msgstr "接入到运营商宽带的网线可以插在任意网口"
+
+msgid 0xEE1B4A8B
+msgstr "支持小米Mesh组网的路由产品"
+
+msgid 0xF1807E93
+msgstr "确认是否关闭LAN口聚合功能"
+
+msgid 0xF1B8FC7F
+msgstr "没有搜索到可用的mesh节点"
+
+msgid 0xF52AD490
+msgstr "当前Wi-Fi的加密方式为超强加密（WPA3），在该模式下部分型号手机可能存在兼容性问题"
+
+msgid 0xF68D282B
+msgstr "1. NFC功能开启"
+
+msgid 0xF8499002
+msgstr "此时5G网络已关闭"
+
+msgid "Mesh模式下不支持切换为中继模式。"
+msgstr "Mesh模式下不支持切换为中继模式。"
+
+msgid ""
+"Mesh模式下不支持切换为中继模式。To ensure the best possible user experience, switching to Repeater mode is not supported in Mesh mode."
+msgstr ""
+"Mesh模式下不支持切换为中继模式。To ensure the best possible user experience, switching to Repeater mode is not supported in Mesh mode."
+
+msgid "Mesh模式下不支持切换为路由模式。"
+msgstr "Mesh模式下不支持切换为路由模式。"
+
+msgid "Redmi路由器"
+msgstr "Redmi路由器"
+
+msgid "启用此功能后，Redmi路由器将开启IPv6上网功能（使用前请咨询网络运营商是否支持IPv6）"
+msgstr "启用此功能后，Redmi路由器将开启IPv6上网功能（使用前请咨询网络运营商是否支持IPv6）"
+
+msgid "开启后，2.4G和5G将合并显示为同一个名称，路由器将优先为终端选择5G网络。合并名称后部分终端可能离线，需重新连接。"
+msgstr "开启后，2.4G和5G将合并显示为同一个名称，路由器将优先为终端选择5G网络。合并名称后部分终端可能离线，需重新连接。"
+
+#: /usr/lib/lua/luci/view/web/inc/store.htm
+msgid "开启后，路由器USB接口将工作在3.0模式下。（USB3.0使用时会对2.4G Wi-Fi有些影响）"
+msgstr "开启后，路由器USB接口将工作在3.0模式下。（USB3.0使用时会对2.4G Wi-Fi有些影响）"
+
+msgid "当前系统时间："
+msgstr "当前系统时间："
+
+msgid "时区设置"
+msgstr "时区设置"
+
+msgid "某些老设备对Wi-Fi6支持不好，可能扫描不到信号或者连接不上等。开启此开关后，将会切"
+msgstr "某些老设备对Wi-Fi6支持不好，可能扫描不到信号或者连接不上等。开启此开关后，将会切"
+
