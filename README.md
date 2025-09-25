@@ -382,26 +382,29 @@ Select language [1-English, 2-中文, 3-Русский]:
 - **用途**: 修改内核的加载地址
 - **应用场景**: 安装自定义固件时使用
 
-#### 7. 安装Breed引导加载器
-- **Breed特点**:
+#### 7. 安装引导加载器 (Breed/U-Boot)
+选择此选项后，系统会提示选择引导加载器类型：
+- **选项1 - Breed引导加载器**:
   - 功能强大的第三方Bootloader
   - 支持Web界面固件刷写
   - 不怕刷坏（变砖保护）
-- **支持型号**: 
-  - R3G, R3P, RM2100, RA71: `breed_r3g_eng.bin`
-  - CR6606, CR6608, CR6609, TR608, TR609: `pb-boot-cr660x.img`
-- **安装命令**: `python3 install_bl.py breed`
-
-#### 7a. 安装原厂U-Boot引导加载器
-- **U-Boot特点**:
+  - **支持型号**: R3G, R3P, RM2100, RA71, CR6606, CR6608, CR6609, TR608, TR609
+  - **文件**: 
+    - R3G, R3P, RM2100, RA71: `breed_r3g_eng.bin`
+    - CR6606, CR6608, CR6609, TR608, TR609: `pb-boot-cr660x.img`
+- **选项2 - U-Boot引导加载器**:
   - 设备原厂Bootloader
   - 设备特定的引导程序
   - 用于恢复原厂引导环境
-- **支持型号**: 
-  - R3G: `uboot_r3g.bin`
-  - R3P: `uboot_r3p.bin`
-  - RM2100: `uboot_rm2100.bin`
-- **安装命令**: `python3 install_bl.py uboot`
+  - **支持型号**: R3G, R3P, RM2100
+  - **文件**: 
+    - R3G: `uboot_r3g.bin`
+    - R3P: `uboot_r3p.bin`
+    - RM2100: `uboot_rm2100.bin`
+- **使用方法**: 选择菜单项7后，按提示选择1（Breed）或2（U-Boot）
+- **直接命令**: 
+  - 安装Breed: `python3 install_bl.py breed`
+  - 安装U-Boot: `python3 install_bl.py uboot`
 
 #### 8. 测试功能
 开发和调试用途的测试功能。
