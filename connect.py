@@ -50,6 +50,11 @@ if gw.model_id > 0 and gw.model_id < gw.get_modelid_by_name('R2100'):
 #  import connect4
 #  sys.exit(0)
 
+# Route BE3600 variants (RD15, RN06) directly to connect6
+if dn in ['RD15', 'RN06']:
+    import connect6
+    sys.exit(0)
+
 if True:
     # init gw and check ssh
     gw = create_gateway(timeout = 4, die_if_sshOk = True, die_if_ftpOk = True, web_login = True, try_telnet = True)
