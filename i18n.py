@@ -43,7 +43,7 @@ TRANSLATIONS = {
         },
         'messages': {
             'firmware_downgrade_title': 'FIRMWARE DOWNGRADE SUGGESTION:',
-            'firmware_downgrade_be3600': 'If exploits are not working on your BE3600 router, please\ndowngrade to firmware version 1.0.68 or older.',
+            'firmware_downgrade_be3600': 'If exploits are not working on your BE3600 router (RD15/RD16/RN06), please\ndowngrade to firmware version 1.0.68 or older.',
             'firmware_downgrade_tutorial': 'Firmware downgrade tutorial:\nhttps://github.com/uyez/lyq/releases/tag/be3600',
             'firmware_downgrade_tool': 'You can use the Xiaomi Router Repair Tool for downgrade.',
             'exploit_failed_title': 'EXPLOIT FAILED:',
@@ -89,7 +89,7 @@ TRANSLATIONS = {
         },
         'messages': {
             'firmware_downgrade_title': '固件降级建议：',
-            'firmware_downgrade_be3600': '如果漏洞利用在您的BE3600路由器上不工作，请\n降级到固件版本1.0.68或更旧版本。',
+            'firmware_downgrade_be3600': '如果漏洞利用在您的BE3600路由器(RD15/RD16/RN06)上不工作，请\n降级到固件版本1.0.68或更旧版本。',
             'firmware_downgrade_tutorial': '固件降级教程：\nhttps://github.com/uyez/lyq/releases/tag/be3600',
             'firmware_downgrade_tool': '您可以使用小米路由器修复工具进行降级。',
             'exploit_failed_title': '漏洞利用失败：',
@@ -135,7 +135,7 @@ TRANSLATIONS = {
         },
         'messages': {
             'firmware_downgrade_title': 'ПРЕДЛОЖЕНИЕ ПОНИЖЕНИЯ ВЕРСИИ ПРОШИВКИ:',
-            'firmware_downgrade_be3600': 'Если эксплойты не работают на вашем роутере BE3600, пожалуйста\nпонизьте версию прошивки до 1.0.68 или старше.',
+            'firmware_downgrade_be3600': 'Если эксплойты не работают на вашем роутере BE3600 (RD15/RD16/RN06), пожалуйста\nпонизьте версию прошивки до 1.0.68 или старше.',
             'firmware_downgrade_tutorial': 'Руководство по понижению версии прошивки:\nhttps://github.com/uyez/lyq/releases/tag/be3600',
             'firmware_downgrade_tool': 'Вы можете использовать инструмент восстановления роутера Xiaomi для понижения версии.',
             'exploit_failed_title': 'ЭКСПЛОЙТ НЕ СРАБОТАЛ:',

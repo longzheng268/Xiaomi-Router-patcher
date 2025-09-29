@@ -84,7 +84,7 @@ if True:
             raise
     
     # Show firmware downgrade suggestion if all exploits failed
-    if not exploit_worked and gw.device_name in ['RD15', 'RN06']:  # BE3600 variants
+    if not exploit_worked and gw.device_name in ['RD15', 'RN06', 'RD16']:  # BE3600 variants (RD15=2.5G, RD16=1G, RN06=INT)
         current_lang = lang_config.get_language() or 'en'
         
         print()
