@@ -64,10 +64,23 @@ if True:
     if hackCheck:
         print(f'hackCheck version =', hackCheck)
 
+    # For devices with hackCheck >= 3, try the new exploit method first
+    if hackCheck >= 3 or dn == 'RD15':
+        print(f'Device {dn} has hackCheck >= 3, trying alternative exploits...')
+        try:
+            import_module('connect8', gw)
+            sys.exit(0)  # Success, exit
+        except (ExploitFixed, ExploitNotWorked) as e:
+            print('WARN:', str(e))
+            print('Falling back to standard exploit methods...')
+        except Exception:
+            print('ERROR: Alternative exploit failed, trying standard methods...')
+
     exp_modules = [
         'connect6',  # arn_switch/start_binding
         'connect5',  # smartcontroller
         'connect7',  # get_icon
+        'connect8',  # alternative exploits for hackCheck >= 3
     ]
     
     exploit_worked = False
