@@ -340,7 +340,7 @@ Select language [1-English, 2-中文, 3-Русский]:
 - **特点**: 重启后仍然有效
 - **现代SSH支持**: 自动生成ed25519和ecdsa密钥，兼容OpenSSH 8.8+等现代SSH客户端
 
-> **注意**: SSH安装脚本会自动生成现代SSH密钥（ed25519和ecdsa），解决了新版OpenSSH客户端的连接问题。如遇到"no matching host key type found"错误，请参考[故障排除](#故障排除)部分。
+> **注意**: SSH安装脚本会自动生成现代SSH密钥（ed25519和ecdsa），解决了新版OpenSSH客户端的连接问题。如遇到"no matching host key type found"错误，请参考[SSH连接问题](#3-ssh连接问题)部分。
 
 #### 7. 安装固件
 - **支持格式**: 
@@ -790,6 +790,6 @@ git push origin feature/new-feature
 5. Install custom firmware or additional features
 
 ### SSH Connection Note
-This tool automatically generates modern SSH host keys (ed25519 and ecdsa) to ensure compatibility with newer SSH clients like OpenSSH 8.8+. If you still encounter connection issues, see the troubleshooting section in the full documentation above.
+This tool automatically generates modern SSH host keys (ed25519 and ecdsa) to ensure compatibility with newer SSH clients like OpenSSH 8.8+. If you still encounter connection issues, see the [SSH Connection Problems](#3-ssh连接问题) section above for detailed troubleshooting steps.
 
 **⚠️ Warning**: Firmware modification carries risks. Always backup before proceeding!
