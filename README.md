@@ -442,7 +442,62 @@ curl -I http://192.168.31.1
 ```
 
 #### 3. SSH连接问题
-**问题**: SSH连接被拒绝
+
+##### 3.1 现代SSH客户端无法连接 (推荐解决方案)
+**问题**: 使用新版OpenSSH客户端(8.8+)连接时出现以下错误:
+```
+Unable to negotiate with 192.168.31.1 port 22: no matching host key type found. Their offer: ssh-rsa
+```
+
+**原因**: 新版OpenSSH已弃用基于SHA-1的RSA密钥算法(`ssh-rsa`)，而路由器的dropbear默认只提供RSA密钥。
+
+**解决方案 (3选1)**:
+
+**方案1: 使用PuTTY (Windows推荐)**
+```bash
+# 下载并使用PuTTY连接
+# PuTTY支持旧版密钥算法，可以直接连接
+# 主机名: 192.168.31.1
+# 端口: 22
+# 用户名: root
+# 密码: root
+```
+
+**方案2: 临时启用旧版算法 (命令行)**
+```bash
+# Windows PowerShell / Linux / macOS
+ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa root@192.168.31.1
+
+# 或者添加到SSH配置文件 (~/.ssh/config 或 %USERPROFILE%\.ssh\config)
+Host 192.168.31.1
+    HostKeyAlgorithms +ssh-rsa
+    PubkeyAcceptedKeyTypes +ssh-rsa
+```
+
+**方案3: 升级路由器的密钥算法 (高级用户)**
+
+连接成功后,在路由器上执行以下命令生成现代密钥:
+```bash
+# 连接到路由器后执行
+ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa root@192.168.31.1
+
+# 生成ed25519密钥 (推荐)
+dropbearkey -t ed25519 -f /etc/dropbear/dropbear_ed25519_host_key
+
+# 生成ecdsa密钥 (备选)
+dropbearkey -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key
+
+# 重启dropbear服务
+/etc/init.d/dropbear restart
+
+# 现在可以使用标准ssh命令连接
+ssh root@192.168.31.1
+```
+
+> **注意**: 首次连接时SSH会提示接受主机密钥指纹，这是正常的安全验证。输入 `yes` 继续连接。
+
+##### 3.2 SSH连接被拒绝
+**问题**: 连接超时或被拒绝
 **解决方案**:
 ```bash
 # 检查SSH服务状态

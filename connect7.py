@@ -121,6 +121,9 @@ payload_add_func('unlock_ssh', r"""
     sed -i 's/release/XXXXXX/g' /etc/init.d/dropbear
     nvram set ssh_en=1 ; nvram set boot_wait=on ; nvram set bootdelay=3 ; nvram commit
     echo -e 'root\nroot' > /tmp/psw.txt ; passwd root < /tmp/psw.txt
+    mkdir -p /etc/dropbear
+    dropbearkey -t ed25519 -f /etc/dropbear/dropbear_ed25519_host_key 0<&- 2>&- >&- || true
+    dropbearkey -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key 0<&- 2>&- >&- || true
     /etc/init.d/dropbear enable
 """)
 payload_add_func('run_ssh', r"""
