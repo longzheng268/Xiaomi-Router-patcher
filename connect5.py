@@ -298,6 +298,13 @@ exec_tiny_cmd("echo root >/tmp/x")
 exec_tiny_cmd("echo root >>/tmp/x")
 exec_tiny_cmd("passwd root </tmp/x")
 
+print('Generate modern SSH host keys for compatibility ...')
+exec_cmd("mkdir -p /etc/dropbear")
+# Generate ed25519 key (most secure, works with modern SSH clients)
+exec_cmd("dropbearkey -t ed25519 -f /etc/dropbear/dropbear_ed25519_host_key 0<&- 2>&- >&- || true")
+# Generate ecdsa key (fallback for compatibility)
+exec_cmd("dropbearkey -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key 0<&- 2>&- >&- || true")
+
 print('Enabling dropbear service ...')
 exec_cmd("/etc/init.d/dropbear enable")
 
