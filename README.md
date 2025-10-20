@@ -338,6 +338,9 @@ Select language [1-English, 2-中文, 3-Русский]:
   - 密码: `root`
 - **端口**: 22
 - **特点**: 重启后仍然有效
+- **现代SSH支持**: 自动生成ed25519和ecdsa密钥，兼容OpenSSH 8.8+等现代SSH客户端
+
+> **注意**: 从v2024版本开始，SSH安装脚本会自动生成现代SSH密钥（ed25519和ecdsa），解决了新版OpenSSH客户端的连接问题。如遇到"no matching host key type found"错误，请参考[故障排除](#故障排除)部分。
 
 #### 7. 安装固件
 - **支持格式**: 
@@ -768,12 +771,13 @@ git push origin feature/new-feature
 
 - **50+ Xiaomi router models** from R1CM to latest AX series
 - **Exploit installation** for gaining root access
-- **Permanent SSH access** with customizable credentials  
+- **Permanent SSH access** with customizable credentials and modern key algorithms (ed25519/ecdsa)
 - **Full firmware backup** and selective partition backup
 - **Custom firmware installation** including OpenWrt support
 - **Bootloader replacement** (Breed support for R3G/R3P/RM2100/RA71/CR660x/TR60x series, U-Boot support for R3G/R3P/RM2100)
 - **Multi-language support** (EN/RU/ZH language packs with Chinese menu interface)
 - **Advanced features** like password change, log reading, feature unlocking
+- **Modern SSH compatibility** - Automatically generates ed25519 and ecdsa keys to work with OpenSSH 8.8+ and other modern SSH clients
 
 ### Quick Start
 **Windows**: Run `run.bat` | **Linux/macOS**: Run `./run.sh`
@@ -784,5 +788,8 @@ git push origin feature/new-feature
 3. Create full backup (highly recommended)
 4. Enable permanent SSH access
 5. Install custom firmware or additional features
+
+### SSH Connection Note
+As of v2024, this tool automatically generates modern SSH host keys (ed25519 and ecdsa) to ensure compatibility with newer SSH clients like OpenSSH 8.8+. If you still encounter connection issues, see the troubleshooting section in the full documentation above.
 
 **⚠️ Warning**: Firmware modification carries risks. Always backup before proceeding!
