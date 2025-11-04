@@ -261,6 +261,9 @@ if not telnet_connect(xqpass):
   die('Failed to authenticate on Telnet server.')
 #gw.run_cmd('(echo root; sleep 1; echo root) | passwd root')
 gw.run_cmd('sed -i \'s/"$flg_ssh" != "1" -o "$channel" = "release"/-n ""/g\' /etc/init.d/dropbear')
+gw.run_cmd('mkdir -p /etc/dropbear')
+gw.run_cmd('dropbearkey -t ed25519 -f /etc/dropbear/dropbear_ed25519_host_key 0<&- 2>&- >&- || true')
+gw.run_cmd('dropbearkey -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key 0<&- 2>&- >&- || true')
 gw.run_cmd("/etc/init.d/dropbear enable")
 print('Run SSH server on port 22 ...')
 gw.run_cmd("/etc/init.d/dropbear restart", timeout = 40)  # RSA host key generate very slow!

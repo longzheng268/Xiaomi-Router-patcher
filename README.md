@@ -338,6 +338,9 @@ Select language [1-English, 2-中文, 3-Русский]:
   - 密码: `root`
 - **端口**: 22
 - **特点**: 重启后仍然有效
+- **现代SSH支持**: 自动生成ed25519和ecdsa密钥，兼容OpenSSH 8.8+等现代SSH客户端
+
+> **注意**: SSH安装脚本会自动生成现代SSH密钥（ed25519和ecdsa），解决了新版OpenSSH客户端的连接问题。如遇到"no matching host key type found"错误，请参考下方[常见问题](#常见问题)中的"现代SSH客户端无法连接"部分。
 
 #### 7. 安装固件
 - **支持格式**: 
@@ -442,7 +445,62 @@ curl -I http://192.168.31.1
 ```
 
 #### 3. SSH连接问题
-**问题**: SSH连接被拒绝
+
+##### 3.1 现代SSH客户端无法连接 (推荐解决方案)
+**问题**: 使用新版OpenSSH客户端(8.8+)连接时出现以下错误:
+```
+Unable to negotiate with 192.168.31.1 port 22: no matching host key type found. Their offer: ssh-rsa
+```
+
+**原因**: 新版OpenSSH已弃用基于SHA-1的RSA密钥算法(`ssh-rsa`)，而路由器的dropbear默认只提供RSA密钥。
+
+**解决方案 (3选1)**:
+
+**方案1: 使用PuTTY (Windows推荐)**
+```bash
+# 下载并使用PuTTY连接
+# PuTTY支持旧版密钥算法，可以直接连接
+# 主机名: 192.168.31.1
+# 端口: 22
+# 用户名: root
+# 密码: root
+```
+
+**方案2: 临时启用旧版算法 (命令行)**
+```bash
+# Windows PowerShell / Linux / macOS
+ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa root@192.168.31.1
+
+# 或者添加到SSH配置文件 (~/.ssh/config 或 %USERPROFILE%\.ssh\config)
+Host 192.168.31.1
+    HostKeyAlgorithms +ssh-rsa
+    PubkeyAcceptedKeyTypes +ssh-rsa
+```
+
+**方案3: 升级路由器的密钥算法 (高级用户)**
+
+连接成功后,在路由器上执行以下命令生成现代密钥:
+```bash
+# 连接到路由器后执行
+ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa root@192.168.31.1
+
+# 生成ed25519密钥 (推荐)
+dropbearkey -t ed25519 -f /etc/dropbear/dropbear_ed25519_host_key
+
+# 生成ecdsa密钥 (备选)
+dropbearkey -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key
+
+# 重启dropbear服务
+/etc/init.d/dropbear restart
+
+# 现在可以使用标准ssh命令连接
+ssh root@192.168.31.1
+```
+
+> **注意**: 首次连接时SSH会提示接受主机密钥指纹，这是正常的安全验证。输入 `yes` 继续连接。
+
+##### 3.2 SSH连接被拒绝
+**问题**: 连接超时或被拒绝
 **解决方案**:
 ```bash
 # 检查SSH服务状态
@@ -713,12 +771,13 @@ git push origin feature/new-feature
 
 - **50+ Xiaomi router models** from R1CM to latest AX series
 - **Exploit installation** for gaining root access
-- **Permanent SSH access** with customizable credentials  
+- **Permanent SSH access** with customizable credentials and modern key algorithms (ed25519/ecdsa)
 - **Full firmware backup** and selective partition backup
 - **Custom firmware installation** including OpenWrt support
 - **Bootloader replacement** (Breed support for R3G/R3P/RM2100/RA71/CR660x/TR60x series, U-Boot support for R3G/R3P/RM2100)
 - **Multi-language support** (EN/RU/ZH language packs with Chinese menu interface)
 - **Advanced features** like password change, log reading, feature unlocking
+- **Modern SSH compatibility** - Automatically generates ed25519 and ecdsa keys to work with OpenSSH 8.8+ and other modern SSH clients
 
 ### Quick Start
 **Windows**: Run `run.bat` | **Linux/macOS**: Run `./run.sh`
@@ -729,5 +788,15 @@ git push origin feature/new-feature
 3. Create full backup (highly recommended)
 4. Enable permanent SSH access
 5. Install custom firmware or additional features
+
+### SSH Connection Note
+This tool automatically generates modern SSH host keys (ed25519 and ecdsa) to ensure compatibility with newer SSH clients like OpenSSH 8.8+. 
+
+**If you encounter connection issues** like "no matching host key type found", you have several options:
+1. **Use PuTTY** (Windows) - supports legacy algorithms natively
+2. **Add SSH options**: `ssh -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa root@192.168.31.1`
+3. **Upgrade router keys** - Connect once with option 2, then run `dropbearkey -t ed25519 -f /etc/dropbear/dropbear_ed25519_host_key` and restart dropbear
+
+See the detailed troubleshooting section in the Chinese documentation above for more information.
 
 **⚠️ Warning**: Firmware modification carries risks. Always backup before proceeding!

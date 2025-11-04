@@ -81,6 +81,10 @@ dropbear_start()
 	[ -f "${val}" ] && append args "-r ${val}"
 	config_get val "${section}" dsskeyfile
 	[ -f "${val}" ] && append args "-d ${val}"
+	config_get val "${section}" ed25519keyfile
+	[ -f "${val}" ] && append args "-r ${val}"
+	config_get val "${section}" ecdsakeyfile
+	[ -f "${val}" ] && append args "-r ${val}"
 
 	# execute program and return its exit code
 	[ "${verbosed}" -ne 0 ] && echo "${initscript}: section ${section} starting ${PROG} ${args}"
@@ -89,6 +93,23 @@ dropbear_start()
 
 start()
 {
+	# Generate modern SSH host keys for compatibility with newer SSH clients
+	mkdir -p /etc/dropbear
+	
+	# Generate ed25519 key (most secure, works with OpenSSH 8.8+)
+	if [ ! -f /etc/dropbear/dropbear_ed25519_host_key ]; then
+		if command -v dropbearkey >/dev/null 2>&1; then
+			dropbearkey -t ed25519 -f /etc/dropbear/dropbear_ed25519_host_key 0<&- 2>&- >&- || true
+		fi
+	fi
+	
+	# Generate ecdsa key (fallback for compatibility)
+	if [ ! -f /etc/dropbear/dropbear_ecdsa_host_key ]; then
+		if command -v dropbearkey >/dev/null 2>&1; then
+			dropbearkey -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key 0<&- 2>&- >&- || true
+		fi
+	fi
+	
 	include /lib/network
 	scan_interfaces
 	config_load "${NAME}"

@@ -47,6 +47,24 @@ if grep -q '= "release"' /etc/init.d/dropbear ; then
 	sed -i 's/= "release"/= "XXXXXX"/g'  /etc/init.d/dropbear
 fi
 
+# Generate modern key types for compatibility with newer SSH clients
+# This fixes "no matching host key type found" errors with OpenSSH 8.8+
+mkdir -p /etc/dropbear
+
+# Generate ed25519 key (most secure and recommended)
+if [ ! -f /etc/dropbear/dropbear_ed25519_host_key ]; then
+	if command -v dropbearkey >/dev/null 2>&1; then
+		dropbearkey -t ed25519 -f /etc/dropbear/dropbear_ed25519_host_key 0<&- 2>&- >&- || true
+	fi
+fi
+
+# Generate ecdsa key (fallback for compatibility)
+if [ ! -f /etc/dropbear/dropbear_ecdsa_host_key ]; then
+	if command -v dropbearkey >/dev/null 2>&1; then
+		dropbearkey -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key 0<&- 2>&- >&- || true
+	fi
+fi
+
 # Additional hardening: ensure dropbear service is enabled and configured
 /etc/init.d/dropbear enable
 
